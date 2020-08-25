@@ -1,7 +1,9 @@
 //  Created by Adam on 12/05/2020.
 import Foundation
 
-
+/*
+ Single linked list without pointer to the last node.
+ */
 class SingleLinkedList<Item: Comparable> {
     
     class Node<Item> {
@@ -124,7 +126,7 @@ class SingleLinkedList<Item: Comparable> {
     }
     
     func removeAllWithOn3(key: Item) {
-        while find(key: key) {
+        while contains(key: key) {
             var iterator = head
             var counter = 0
             while iterator != nil {
@@ -138,18 +140,21 @@ class SingleLinkedList<Item: Comparable> {
         }
     }
     
-    func find(key: Item) -> Bool {
-        if isEmpty() {
-            return false
-        }
+    func indexOf(key: Item) -> Int {
         var iterator = head
+        var index = 0
         while iterator != nil {
             if iterator!.data == key {
-                return true
+                return index
             }
-            iterator = iterator!.next
+            iterator = iterator?.next
+            index += 1
         }
-        return false
+        return -1
+    }
+    
+    func contains(key: Item) -> Bool {
+        return indexOf(key: key) != -1
     }
     
     func findMax() -> Item? {
@@ -198,22 +203,22 @@ class SingleLinkedList<Item: Comparable> {
         head = a
     }
     
-    func toString() {
+    func toString() -> String {
         if isEmpty() {
-            print("empty list")
+            return "[]"
+        }
+
+        if hasCycle() {
+            return "[cyclic list]"
         }
         
+        var result = ""
         var iterator = head
-        let cycleExists = hasCycle()
-        if !cycleExists {
-            while(iterator != nil) {
-                print("\(iterator!.data)")
-                iterator = iterator!.next
-            }
+        while(iterator != nil) {
+            result += "\(iterator!.data), "
+            iterator = iterator!.next
         }
-        if cycleExists {
-            print("cycle exists cannot print")
-        }
+        return result
     }
     
 }
