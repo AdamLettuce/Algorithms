@@ -23,7 +23,7 @@ class SingleLinkedList<Item: Comparable> {
         head = Node(value)
     }
     
-    func addBegin(_ value: Item) -> Node<Item> {
+    func addBegin(_ value: Item) {
         if head == nil {
             head = Node(value)
         } else {
@@ -31,7 +31,6 @@ class SingleLinkedList<Item: Comparable> {
             newNode.next = head
             head = newNode
         }
-        return head!
     }
     
     func hasCycle() -> Bool {
@@ -212,10 +211,14 @@ class SingleLinkedList<Item: Comparable> {
             return "[cyclic list]"
         }
         
-        var result = ""
+        var result = "["
         var iterator = head
         while(iterator != nil) {
-            result += "\(iterator!.data), "
+            if iterator?.next != nil {
+                result += "\(iterator!.data), "
+            } else {
+                result += "\(iterator!.data)]"
+            }
             iterator = iterator!.next
         }
         return result
