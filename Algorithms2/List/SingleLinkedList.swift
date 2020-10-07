@@ -1,57 +1,46 @@
 //  Created by Adam on 12/05/2020.
 import Foundation
 
-/*
- Single linked list without pointer to the last node.
- */
-class SingleLinkedList<Item: Comparable> {
-    
-    class Node<Item> {
-        var data: Item
-        var next: Node<Item>?
-        
-        init(_ data: Item) {
-            self.data = data
-        }
-    }
-    
-    var head: Node<Item>?
-    
-    init() {}
-    
-    init(value: Item) {
-        head = Node(value)
-    }
-    
-    func addBegin(_ value: Item) {
-        if head == nil {
-            head = Node(value)
+
+class SingleLinkedList<Item: Comparable>: List<Item> {
+
+    func insertBegin(_ value: Item) {
+        let newNode = Node<Item>(value)
+        if isEmpty() {
+            head = newNode
         } else {
-            let newNode = Node<Item>(value)
             newNode.next = head
             head = newNode
         }
+        elementsCount += 1
     }
     
-    func hasCycle() -> Bool {
-        var it1 = head
-        var it2 = head?.next?.next
-
-        while it1 != nil && it2 != nil {
-            if it1 === it2 {
-                return true
-            }
-            it1 = it1!.next
-            it2 = it2!.next?.next
+    func insertEnd(value: Item) {
+        let node = Node<Item>(value)
+        if isEmpty() {
+            head = node
+        } else {
+            head?.next = node
         }
-        return false
+        elementsCount += 1
     }
     
-    func createCycleBetween(first: Node<Item>, second: Node<Item>) {
-        second.next = first
-    }
+    func removeBegin() -> Item? {
+        if isEmpty() {
+            return nil
+        }
         
-    func removeLast() {
+        let oldHead = head
+        let result = head!.data
+        head = head!.next
+        oldHead!.next = nil
+        
+        elementsCount -= 1
+        
+        return result
+    }
+    
+    func removeEnd() {
         if isEmpty() {
             return
         }
@@ -68,10 +57,8 @@ class SingleLinkedList<Item: Comparable> {
             it2 = it2?.next
         }
         it1!.next = nil
-    }
-    
-    func isEmpty() -> Bool {
-        return head == nil
+        
+        elementsCount -= 1
     }
     
     func removeAt(index: Int) {
@@ -93,11 +80,29 @@ class SingleLinkedList<Item: Comparable> {
         iterator?.next = iterator?.next?.next
         nodeToRemove?.next = nil
                 
+        elementsCount -= 1
     }
     
     func removeAfter(index: Int) {
         removeAt(index: index + 1)
     }
+    
+    /* Brute-force solution
+     func removeAllWithOn3(key: Item) {
+         while contains(key: key) {
+             var iterator = head
+             var counter = 0
+             while iterator != nil {
+                 if iterator!.data == key {
+                     removeAt(index: counter)
+                     counter -= 1
+                 }
+                 counter += 1
+                 iterator = iterator!.next
+             }
+         }
+     }
+     */
     
     func removeAllWith(key: Item) {
         if isEmpty() {
@@ -107,6 +112,7 @@ class SingleLinkedList<Item: Comparable> {
         while head?.data == key {
             let headNext = head!.next
             head!.next = nil
+            elementsCount -= 1
             head = headNext
         }
         
@@ -116,6 +122,7 @@ class SingleLinkedList<Item: Comparable> {
             if b!.data == key {
                 a!.next = b!.next
                 b!.next = nil
+                elementsCount -= 1
                 b = a!.next
             } else {
                 a = a!.next
@@ -123,39 +130,12 @@ class SingleLinkedList<Item: Comparable> {
             }
         }
     }
-    
-    func removeAllWithOn3(key: Item) {
-        while contains(key: key) {
-            var iterator = head
-            var counter = 0
-            while iterator != nil {
-                if iterator!.data == key {
-                    removeAt(index: counter)
-                    counter -= 1
-                }
-                counter += 1
-                iterator = iterator!.next
-            }
-        }
+        
+    func findPrevious(node: Node<Int>) -> Node<Int>? {
+        //TODO: please implement me
+        return nil
     }
-    
-    func indexOf(key: Item) -> Int {
-        var iterator = head
-        var index = 0
-        while iterator != nil {
-            if iterator!.data == key {
-                return index
-            }
-            iterator = iterator?.next
-            index += 1
-        }
-        return -1
-    }
-    
-    func contains(key: Item) -> Bool {
-        return indexOf(key: key) != -1
-    }
-    
+                        
     func findMax() -> Item? {
         if isEmpty() { return nil }
         var iterator = head!.next
@@ -185,7 +165,22 @@ class SingleLinkedList<Item: Comparable> {
         return prevMax
     }
     
-    func revert() {
+    func findMin() -> Int? {
+        //TODO: please implement me
+        return nil
+    }
+    
+    func findMinRecursive() -> Int? {
+        //TODO: please implement me
+        return nil
+    }
+    
+    func findMinRecursive(prevMax: Int, head: Node<Int>?) -> Int {
+        //TODO: please implement me
+        return 0
+    }
+    
+    override func revert() {
         if isEmpty() {
             return
         }
@@ -200,28 +195,6 @@ class SingleLinkedList<Item: Comparable> {
             b = c
         }
         head = a
-    }
-    
-    func toString() -> String {
-        if isEmpty() {
-            return "[]"
-        }
-
-        if hasCycle() {
-            return "[cyclic list]"
-        }
-        
-        var result = "["
-        var iterator = head
-        while(iterator != nil) {
-            if iterator?.next != nil {
-                result += "\(iterator!.data), "
-            } else {
-                result += "\(iterator!.data)]"
-            }
-            iterator = iterator!.next
-        }
-        return result
     }
     
 }
