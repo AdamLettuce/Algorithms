@@ -1,11 +1,4 @@
-//
-//  LinkedList.swift
-//  Algorithms2
-//
 //  Created by Adam on 23/08/2020.
-//  Copyright © 2020 lettucesoftware. All rights reserved.
-//
-
 import Foundation
 
 
@@ -61,57 +54,7 @@ class SingleLinkedListWithTail: List<Int> {
         elementsCount -= 1
         return result
     }
-    
-    func removeAt(index: Int) {
-        //TODO: please implement me
-    }
-    
-    func removeAfter(index: Int) {
-        //TODO: please implement me
-    }
-    
-    func removeAllWith(key: Int) {
-        //TODO: please implement me
-    }
-    
-    func findPrevious(node: Node<Int>) -> Node<Int>? {
-        var iterator = head
-        while iterator?.next !== node {
-            iterator = iterator!.next
-        }
-        return iterator
-    }
-    
-    func findMax() -> Int? {
-        //TODO: please implement me
-        return nil
-    }
-    
-    func findMaxRecursive() -> Int? {
-        //TODO: please implement me
-        return nil
-    }
-    
-    func findMaxRecursive(prevMax: Int, head: Node<Int>?) -> Int {
-        //TODO: please implement me
-        return 0
-    }
-    
-    func findMin() -> Int? {
-        //TODO: please implement me
-        return nil
-    }
-    
-    func findMinRecursive() -> Int? {
-        //TODO: please implement me
-        return nil
-    }
-    
-    func findMinRecursive(prevMax: Int, head: Node<Int>?) -> Int {
-        //TODO: please implement me
-        return 0
-    }
-    
+        
     override func revert() {
         var a = head
         var b = a?.next
