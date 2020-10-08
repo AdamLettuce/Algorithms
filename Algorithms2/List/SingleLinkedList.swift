@@ -3,27 +3,6 @@ import Foundation
 
 
 class SingleLinkedList<Item: Comparable>: List<Item> {
-
-    func insertBegin(_ value: Item) {
-        let newNode = Node<Item>(value)
-        if isEmpty() {
-            head = newNode
-        } else {
-            newNode.next = head
-            head = newNode
-        }
-        elementsCount += 1
-    }
-    
-    func insertEnd(value: Item) {
-        let node = Node<Item>(value)
-        if isEmpty() {
-            head = node
-        } else {
-            head?.next = node
-        }
-        elementsCount += 1
-    }
     
     func removeBegin() -> Item? {
         if isEmpty() {

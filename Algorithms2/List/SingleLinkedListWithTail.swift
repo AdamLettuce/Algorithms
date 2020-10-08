@@ -6,28 +6,16 @@ class SingleLinkedListWithTail<Item: Comparable>: List<Item> {
     
     var tail: Node<Item>?
     
-    func insertBegin(value: Item) {
-        let newNode = Node(value)
-        if isEmpty() {
-            head = newNode
-            tail = head
-        } else {
-            newNode.next = head
-            head = newNode
-        }
-        elementsCount += 1
+    override func onInsertBeginIsEmpty() {
+        tail = head
     }
     
-    func insertEnd(value: Item) {
-        let node = Node(value)
-        if isEmpty() {
-            head = node
-            tail = node
-        } else {
-            head?.next = node
-            tail = node
-        }
-        elementsCount += 1
+    override func onInsertEndIsEmpty(_ node: Node<Item>) {
+        tail = node
+    }
+
+    override func onInsertEndIsNotEmpty(_ node: Node<Item>) {
+        tail = node
     }
     
     func removeBegin() -> Item? {

@@ -32,6 +32,42 @@ class List<Item: Comparable> {
         return head == nil
     }
     
+    func insertBegin(_ value: Item) {
+        let newNode = Node<Item>(value)
+        if isEmpty() {
+            head = newNode
+            onInsertBeginIsEmpty()
+        } else {
+            newNode.next = head
+            head = newNode
+        }
+        elementsCount += 1
+    }
+    
+    func onInsertBeginIsEmpty() {
+        //Template method, please implement me in the subclass
+    }
+    
+    func insertEnd(_ value: Item) {
+        let node = Node(value)
+        if isEmpty() {
+            head = node
+            onInsertEndIsEmpty(node)
+        } else {
+            head?.next = node
+            onInsertEndIsNotEmpty(node)
+        }
+        elementsCount += 1
+    }
+    
+    func onInsertEndIsEmpty(_ node: Node<Item>) {
+        //Template method, please implement me in the subclass
+    }
+    
+    func onInsertEndIsNotEmpty(_ node: Node<Item>) {
+        //Template method, please implement me in the subclass
+    }
+    
     func indexOf(value: Item) -> Int {
         var iterator = head
         var index = 0
