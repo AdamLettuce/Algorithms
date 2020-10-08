@@ -2,11 +2,11 @@
 import Foundation
 
 
-class SingleLinkedListWithTail: List<Int> {
+class SingleLinkedListWithTail<Item: Comparable>: List<Item> {
     
-    var tail: Node<Int>?
+    var tail: Node<Item>?
     
-    func insertBegin(value: Int) {
+    func insertBegin(value: Item) {
         let newNode = Node(value)
         if isEmpty() {
             head = newNode
@@ -18,7 +18,7 @@ class SingleLinkedListWithTail: List<Int> {
         elementsCount += 1
     }
     
-    func insertEnd(value: Int) {
+    func insertEnd(value: Item) {
         let node = Node(value)
         if isEmpty() {
             head = node
@@ -30,7 +30,7 @@ class SingleLinkedListWithTail: List<Int> {
         elementsCount += 1
     }
     
-    func removeBegin() -> Int? {
+    func removeBegin() -> Item? {
         let result = head?.data
         let second = head?.next
         head?.next = nil
@@ -39,8 +39,8 @@ class SingleLinkedListWithTail: List<Int> {
         return result
     }
     
-    func removeEnd() -> Int? {
-        var result: Int?
+    func removeEnd() -> Item? {
+        var result: Item?
         if head !== tail {
             let previous = findPrevious(node: tail!)
             result = tail!.data
@@ -58,7 +58,7 @@ class SingleLinkedListWithTail: List<Int> {
     override func revert() {
         var a = head
         var b = a?.next
-        var c: Node<Int>? = nil
+        var c: Node<Item>? = nil
         a?.next = c
         
         while b != nil {
