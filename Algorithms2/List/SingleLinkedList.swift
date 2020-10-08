@@ -165,19 +165,31 @@ class SingleLinkedList<Item: Comparable>: List<Item> {
         return prevMax
     }
     
-    func findMin() -> Int? {
-        //TODO: please implement me
-        return nil
+    func findMin() -> Item? {
+        var result = head?.data
+        var iterator = head?.next
+        while iterator != nil {
+            if iterator!.data < result! {
+                result = iterator!.data
+            }
+            iterator = iterator!.next
+        }
+        return result
     }
     
-    func findMinRecursive() -> Int? {
-        //TODO: please implement me
-        return nil
+    func findMinRecursive() -> Item? {
+        var result = head?.data
+        if head?.next != nil {
+            result = findMinRecursive(prevMin: result!, head: head!.next!)
+        }
+        return result
     }
     
-    func findMinRecursive(prevMax: Int, head: Node<Int>?) -> Int {
-        //TODO: please implement me
-        return 0
+    func findMinRecursive(prevMin: Item, head: Node<Item>) -> Item? {
+        if head.data < prevMin {
+            return head.data
+        }
+        return prevMin
     }
     
     override func revert() {

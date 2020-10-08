@@ -45,4 +45,64 @@ class SingleLinkedListUnitTests: XCTestCase {
         XCTAssertEqual(removed, 10)
         XCTAssertNil(list.removeBegin())
     }
+    
+    func test_findMin_emptyList() {
+        //given
+        let list = SingleLinkedList<Int>()
+        //when
+        let actual = list.findMin()
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_findMin_oneElement() {
+        //given
+        let list = SingleLinkedList<Int>()
+        list.insertBegin(10)
+        //when
+        let actual = list.findMin()
+        //then
+        XCTAssertEqual(10, actual)
+    }
+    
+    func test_findMin_twoElements() {
+        //given
+        let list = SingleLinkedList<Int>()
+        list.insertBegin(10)
+        list.insertBegin(1)
+        //when
+        let actual = list.findMin()
+        //then
+        XCTAssertEqual(1, actual)
+    }
+    
+    func test_findMinRecursive_emptyList() {
+        //given
+        let list = SingleLinkedList<Int>()
+        //when
+        let actual = list.findMinRecursive()
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_findMinRecursive_oneElement() {
+        //given
+        let list = SingleLinkedList<Int>()
+        list.insertBegin(10)
+        //when
+        let actual = list.findMinRecursive()
+        //then
+        XCTAssertEqual(10, actual)
+    }
+    
+    func test_findMinRecursive_twoElements() {
+        //given
+        let list = SingleLinkedList<Int>()
+        list.insertBegin(10)
+        list.insertBegin(1)
+        //when
+        let actual = list.findMinRecursive()
+        //then
+        XCTAssertEqual(1, actual)
+    }
 }
