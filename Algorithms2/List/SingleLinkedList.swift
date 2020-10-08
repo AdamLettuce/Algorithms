@@ -24,22 +24,5 @@ class SingleLinkedList<Item: Comparable>: List<Item> {
         
         elementsCount -= 1
     }
-                                        
-    override func revert() {
-        if isEmpty() {
-            return
-        }
-        var a = head
-        var b = head!.next
-        var c: Node<Item>? = nil
-        a?.next = c
-        while b != nil {
-            c = b?.next
-            b?.next = a
-            a = b
-            b = c
-        }
-        head = a
-    }
-    
+
 }

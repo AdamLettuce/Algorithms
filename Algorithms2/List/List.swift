@@ -230,7 +230,24 @@ class List<Item: Comparable> {
         }
     }
     
-    func revert() {}
+    func revert() {
+        var a = head
+        var b = head?.next
+        var c: Node<Item>? = nil
+        a?.next = c
+        while b != nil {
+            c = b?.next
+            b?.next = a
+            a = b
+            b = c
+        }
+        onRevertEnd()
+        head = a
+    }
+    
+    func onRevertEnd() {
+        //Template method, please implement me in the subclass
+    }
         
     func createCycleBetween(first: Node<Item>, second: Node<Item>) {
         second.next = first
@@ -252,6 +269,20 @@ class List<Item: Comparable> {
     
     func size() -> Int {
         return elementsCount
+    }
+    
+    func get(_ index: Int) -> Item? {
+        if index >= elementsCount || index < 0 {
+            return nil
+        }
+        var counter = 0
+        var iterator = head
+        while iterator != nil && counter < index {
+            iterator = iterator?.next
+            counter += 1
+        }
+        return iterator?.data
+  
     }
     
     func toArray() -> [Item] {
