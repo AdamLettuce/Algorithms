@@ -105,4 +105,34 @@ class SingleLinkedListUnitTests: XCTestCase {
         //then
         XCTAssertEqual(1, actual)
     }
+    
+    func test_removeBegin_emptyList() {
+        //given
+        let list = SingleLinkedList<Int>()
+        //when
+        let actual = list.removeBegin()
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_removeBegin_oneElement() {
+        //given
+        let list = SingleLinkedList<Int>()
+        list.insertBegin(11)
+        //when
+        let actual = list.removeBegin()
+        //then
+        XCTAssertEqual(11, actual)
+    }
+    
+    func test_removeBegin_twoElements() {
+        //given
+        let list = SingleLinkedList<Int>()
+        list.insertBegin(11)
+        list.insertBegin(10)
+        //when
+        let actual = list.removeBegin()
+        //then
+        XCTAssertEqual(10, actual)
+    }
 }

@@ -3,22 +3,7 @@ import Foundation
 
 
 class SingleLinkedList<Item: Comparable>: List<Item> {
-    
-    func removeBegin() -> Item? {
-        if isEmpty() {
-            return nil
-        }
         
-        let oldHead = head
-        let result = head!.data
-        head = head!.next
-        oldHead!.next = nil
-        
-        elementsCount -= 1
-        
-        return result
-    }
-    
     func removeEnd() {
         if isEmpty() {
             return

@@ -149,6 +149,17 @@ class List<Item: Comparable> {
         return iterator
     }
     
+    func removeBegin() -> Item? {
+        let oldHead = head
+        let result = head?.data
+        head = head?.next
+        oldHead?.next = nil
+        if elementsCount > 0 {
+            elementsCount -= 1
+        }
+        return result
+    }
+    
     func removeAt(index: Int) {
         if isEmpty() {
             return
