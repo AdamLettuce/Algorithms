@@ -8,17 +8,17 @@
 import XCTest
 
 
-class SingleLinkedListUnitTests: XCTestCase {
+class SingleLinkedListWithoutTailUnitTests: XCTestCase {
     
     func test_addFirst() {
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(1)
         XCTAssertFalse(list.isEmpty())
     }
     
     func test_removeBegin_fromEmptyList() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         let removed = list.removeBegin()
         //then
@@ -27,7 +27,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_removeBegin_fromListWithOneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         //when
         let removed = list.removeBegin()
@@ -37,7 +37,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_removeBeginTwice_fromListWithOneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         //when
         let removed = list.removeBegin()
@@ -48,7 +48,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_findMin_emptyList() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         let actual = list.findMin()
         //then
@@ -57,7 +57,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_findMin_oneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         //when
         let actual = list.findMin()
@@ -67,7 +67,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_findMin_twoElements() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         list.insertBegin(1)
         //when
@@ -78,7 +78,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_findMinRecursive_emptyList() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         let actual = list.findMinRecursive()
         //then
@@ -87,7 +87,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_findMinRecursive_oneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         //when
         let actual = list.findMinRecursive()
@@ -97,7 +97,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_findMinRecursive_twoElements() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         list.insertBegin(1)
         //when
@@ -108,7 +108,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_removeBegin_emptyList() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         let actual = list.removeBegin()
         //then
@@ -117,7 +117,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_removeBegin_oneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(11)
         //when
         let actual = list.removeBegin()
@@ -127,7 +127,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_removeBegin_twoElements() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(11)
         list.insertBegin(10)
         //when
@@ -138,7 +138,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_revert_emptyList() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         list.revert()
         //then
@@ -147,7 +147,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_get_emptyList() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         let actual = list.get(0)
         //then
@@ -156,7 +156,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_get_emptyList_indexOutOfRange() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         //when
         let actual = list.get(1230)
         //then
@@ -165,7 +165,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_get_oneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(1)
         //when
         let actual = list.get(0)
@@ -175,7 +175,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_get_twoElements() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(1)
         list.insertBegin(2)
         //when
@@ -186,7 +186,7 @@ class SingleLinkedListUnitTests: XCTestCase {
         
     func test_revert_oneElement() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         //when
         list.revert()
@@ -197,7 +197,7 @@ class SingleLinkedListUnitTests: XCTestCase {
     
     func test_revert_twoElements() {
         //given
-        let list = SingleLinkedList<Int>()
+        let list = newInstance()
         list.insertBegin(10)
         list.insertBegin(20)
         //when
@@ -205,5 +205,9 @@ class SingleLinkedListUnitTests: XCTestCase {
         //then
         XCTAssertEqual(10, list.get(0))
         XCTAssertEqual(20, list.get(1))
+    }
+    
+    func newInstance() -> SingleLinkedList<Int> {
+        return SingleLinkedListWithTail<Int>()
     }
 }

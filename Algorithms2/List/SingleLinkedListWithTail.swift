@@ -2,7 +2,7 @@
 import Foundation
 
 
-class SingleLinkedListWithTail<Item: Comparable>: List<Item> {
+class SingleLinkedListWithTail<Item: Comparable>: SingleLinkedList<Item> {
     
     var tail: Node<Item>?
 
