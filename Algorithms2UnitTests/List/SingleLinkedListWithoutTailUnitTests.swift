@@ -207,6 +207,83 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(20, list.get(1))
     }
     
+    func test_findKthFromTheEnd_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let actual = list.findKthFromTheEnd(1)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_find0thFromTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertBegin(10)
+        //when
+        let actual = list.findKthFromTheEnd(0)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_findMinus1stFromTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertBegin(10)
+        //when
+        let actual = list.findKthFromTheEnd(-1)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_find1stFromTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertBegin(10)
+        list.insertBegin(20)
+        //when
+        let actual = list.findKthFromTheEnd(1)
+        //then
+        XCTAssertEqual(10, actual!.data)
+    }
+    
+    func test_find2ndFromTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertBegin(10)
+        list.insertBegin(20)
+        //when
+        let actual = list.findKthFromTheEnd(2)
+        //then
+        XCTAssertEqual(20, actual!.data)
+    }
+    
+    func test_find3rdFromTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertBegin(10)
+        list.insertBegin(20)
+        list.insertBegin(30)
+        list.insertBegin(40)
+        //when
+        let actual = list.findKthFromTheEnd(3)
+        //then
+        XCTAssertEqual(30, actual!.data)
+    }
+    
+    func test_find5thFromTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertBegin(10)
+        list.insertBegin(20)
+        list.insertBegin(30)
+        list.insertBegin(40)
+        //when
+        let actual = list.findKthFromTheEnd(7)
+        //then
+        XCTAssertNil(actual)
+    }
+    
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithTail<Int>()
     }

@@ -141,6 +141,30 @@ class SingleLinkedList<Item: Comparable> {
         return prevMin
     }
     
+    func findKthFromTheEnd(_ k: Int) -> Node<Item>? {
+        if k <= 0 || isEmpty() {
+            return nil
+        }
+        
+        var firstIterator = head
+        var secondIterator = head
+        var counter = 0
+        while secondIterator != nil && counter < k - 1{
+            secondIterator = secondIterator!.next
+            counter += 1
+        }
+
+        if secondIterator == nil {
+            return nil
+        }
+        
+        while secondIterator?.next != nil {
+            firstIterator = firstIterator!.next
+            secondIterator = secondIterator!.next
+        }
+        return firstIterator
+    }
+    
     func findPrevious(node: Node<Item>) -> Node<Item>? {
         var iterator = head
         while iterator?.next !== node {
