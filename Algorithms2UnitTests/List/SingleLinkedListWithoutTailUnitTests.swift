@@ -306,9 +306,77 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(3, list.get(2))
     }
     
+    func test_insert_atPosition0_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.insert(1,atPosition: 0)
+        //then
+        XCTAssertEqual(1, list.get(0))
+    }
+    
+    func test_insert_atPositionMinus1_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.insert(1,atPosition: -1)
+        //then
+        XCTAssertEqual(1, list.get(0))
+    }
+    
+    func test_insert_atPosition1_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.insert(1,atPosition: 1)
+        //then
+        XCTAssertEqual(1, list.get(0))
+    }
+   
+    func test_insert_atPositionMinus10_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(3)
+        list.insert(2,atPosition: -10)
+        //then
+        XCTAssertEqual(2, list.get(0))
+        XCTAssertEqual(1, list.get(1))
+        XCTAssertEqual(3, list.get(2))
+    }
+    
+    func test_insert_atPosition10_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(3)
+        list.insert(2,atPosition: 10)
+        //then
+        XCTAssertEqual(1, list.get(0))
+        XCTAssertEqual(3, list.get(1))
+        XCTAssertEqual(2, list.get(2))
+    }
+    
+    func test_insert_atPosition1_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(3)
+        list.insert(2,atPosition: 1)
+        //then
+        XCTAssertEqual(1, list.get(0))
+        XCTAssertEqual(2, list.get(1))
+        XCTAssertEqual(3, list.get(2))
+    }
+    
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithoutTail<Int>()
     }
+    
+    
     
 
 }

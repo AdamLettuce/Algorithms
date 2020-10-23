@@ -60,6 +60,28 @@ class SingleLinkedList<Item: Comparable> {
         elementsCount += 1
     }
     
+    func insert(_ key: Item, atPosition: Int) {
+        let newNode = Node(key)
+        if isEmpty() {
+            head = newNode
+        } else {
+            if atPosition <= 0 {
+                insertBegin(key)
+                return
+            }
+            var i = 0
+            var iterator = head
+            while iterator!.next != nil && i < atPosition - 1 {
+                i += 1
+                iterator = iterator!.next
+            }
+            let tmp = iterator!.next
+            iterator!.next = newNode
+            newNode.next = tmp
+        }
+        elementsCount += 1
+    }
+    
     func onInsertEndIsEmpty(_ node: Node<Item>) {
         //Template method, please implement me in the subclass
     }
