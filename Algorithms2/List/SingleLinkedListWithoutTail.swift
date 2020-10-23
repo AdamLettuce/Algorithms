@@ -24,5 +24,19 @@ class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
         
         elementsCount -= 1
     }
+    
+    override func insertEnd(_ value: Item) {
+        let newNode = Node(value)
+        if isEmpty() {
+            head = newNode
+        } else {
+            var iterator = head
+            while iterator!.next !== nil {
+                iterator = iterator!.next
+            }
+            iterator!.next = newNode
+        }
+        elementsCount += 1
+    }
 
 }

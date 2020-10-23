@@ -284,7 +284,31 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertNil(actual)
     }
     
-    func newInstance() -> SingleLinkedList<Int> {
-        return SingleLinkedListWithTail<Int>()
+    func test_insertEnd_oneElement() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        //then
+        XCTAssertFalse(list.isEmpty())
     }
+    
+    func test_insertEnd_twoElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        //then
+        XCTAssertEqual(1, list.get(0))
+        XCTAssertEqual(2, list.get(1))
+        XCTAssertEqual(3, list.get(2))
+    }
+    
+    func newInstance() -> SingleLinkedList<Int> {
+        return SingleLinkedListWithoutTail<Int>()
+    }
+    
+
 }
