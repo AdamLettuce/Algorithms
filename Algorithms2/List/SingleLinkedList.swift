@@ -60,26 +60,30 @@ class SingleLinkedList<Item: Comparable> {
         elementsCount += 1
     }
     
-    func insert(_ key: Item, atPosition: Int) {
-        let newNode = Node(key)
-        if isEmpty() {
-            head = newNode
+    func insert(_ key: Item, atPosition position: Int) {
+        if position <= 0 {
+            insertBegin(key)
+        } else if position >= elementsCount {
+            insertEnd(key)
         } else {
-            if atPosition <= 0 {
-                insertBegin(key)
-                return
-            }
-            var i = 0
-            var iterator = head
-            while iterator!.next != nil && i < atPosition - 1 {
-                i += 1
-                iterator = iterator!.next
-            }
-            let tmp = iterator!.next
-            iterator!.next = newNode
-            newNode.next = tmp
+            let newNode = Node(key)
+            let previousPosition = position - 1
+            let nodeAtPreviousPosition = nodeAt(previousPosition)
+            newNode.next = nodeAtPreviousPosition!.next
+            nodeAtPreviousPosition!.next = newNode
+            elementsCount += 1
         }
-        elementsCount += 1
+
+    }
+    
+    func nodeAt(_ position: Int) -> Node<Item>? {
+        var iterator = head
+        var counter = 0
+        while iterator?.next != nil && counter < position {
+            iterator = iterator?.next
+            counter += 1
+        }
+        return iterator
     }
     
     func onInsertEndIsEmpty(_ node: Node<Item>) {
