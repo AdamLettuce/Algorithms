@@ -64,11 +64,7 @@ class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
         if isEmpty() { return nil }
         
         if head!.data == key {
-            let tmp = head
-            head = head!.next
-            tmp?.next = nil
-            elementsCount -= 1
-            return tmp!.data
+            return removeBegin()
         }
         
         var iterator = head
