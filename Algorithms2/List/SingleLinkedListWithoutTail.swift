@@ -59,5 +59,30 @@ class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
         }
         elementsCount += 1
     }
+    
+    override func removeFirstWith(key: Item) -> Item? {
+        if isEmpty() { return nil }
+        
+        if head!.data == key {
+            let tmp = head
+            head = head!.next
+            tmp?.next = nil
+            elementsCount -= 1
+            return tmp!.data
+        }
+        
+        var iterator = head
+        while iterator!.next != nil && iterator!.next?.data != key {
+            iterator = iterator!.next
+        }
+        
+        let tmp = iterator!.next
+        iterator!.next = tmp?.next
+        tmp?.next = nil
+        
+        elementsCount -= 1
+        
+        return tmp?.data
+    }
 
 }

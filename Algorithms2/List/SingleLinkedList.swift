@@ -219,6 +219,10 @@ class SingleLinkedList<Item: Comparable> {
         return removeAt(index: index + 1)
     }
     
+    func removeFirstWith(key: Item) -> Item? {
+        return nil
+    }
+    
     /* Brute-force solution
      func removeAllWithOn3(key: Item) {
          while contains(key: key) {

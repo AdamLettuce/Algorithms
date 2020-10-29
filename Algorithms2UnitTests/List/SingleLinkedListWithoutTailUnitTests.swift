@@ -414,6 +414,69 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(2, list.get(1))
     }
     
+    func test_removeFirstWithKey_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let reslut = list.removeFirstWith(key: 3)
+        //then
+        XCTAssertNil(reslut)
+    }
+    
+    func test_removeFirstWithKey_listWithOneElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        let reslut = list.removeFirstWith(key: 10)
+        //then
+        XCTAssertEqual(10, reslut)
+    }
+    
+    func test_removeFirstWithKey_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(3)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        let reslut = list.removeFirstWith(key: 3)
+        //then
+        XCTAssertEqual(3, reslut)
+        XCTAssertEqual(2, list.get(0))
+        XCTAssertEqual(3, list.get(1))
+    }
+    
+    func test_removeSecondWithKey_listWithFourElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(3)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        list.insertEnd(2)
+        let reslut = list.removeFirstWith(key: 2)
+        //then
+        XCTAssertEqual(2, reslut)
+        XCTAssertEqual(3, list.get(0))
+        XCTAssertEqual(3, list.get(1))
+        XCTAssertEqual(2, list.get(2))
+    }
+    
+    func test_removeLastWithKey_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        let reslut = list.removeFirstWith(key: 3)
+        //then
+        XCTAssertEqual(3, reslut)
+        XCTAssertEqual(1, list.get(0))
+        XCTAssertEqual(2, list.get(1))
+    }
+    
     func test_removeAtL_emptyList() {
         //given
         let list = newInstance()
