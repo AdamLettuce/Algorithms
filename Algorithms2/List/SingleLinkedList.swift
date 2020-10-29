@@ -210,30 +210,13 @@ class SingleLinkedList<Item: Comparable> {
         return result
     }
     
-    func removeAt(index: Int) {
-        if isEmpty() {
-            return
-        }
-        if index == 0 {
-            head = head!.next
-            return
-        }
-        var counter = 0
-        var iterator = head
-        while counter < index - 1 {
-            iterator = iterator?.next
-            counter += 1
-        }
-
-        let nodeToRemove = iterator?.next
-        iterator?.next = iterator?.next?.next
-        nodeToRemove?.next = nil
-                
-        elementsCount -= 1
+    func removeAt(index: Int) -> Item? {
+        //Template method, please implement me in the subclass
+        return nil
     }
     
-    func removeAfter(index: Int) {
-        removeAt(index: index + 1)
+    func removeAfter(index: Int) -> Item? {
+        return removeAt(index: index + 1)
     }
     
     /* Brute-force solution

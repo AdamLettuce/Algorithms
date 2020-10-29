@@ -372,11 +372,59 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(3, list.get(2))
     }
     
+    func test_removeAtZeroPosition_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        let reslut = list.removeAt(index: 0)
+        //then
+        XCTAssertEqual(1, reslut)
+        XCTAssertEqual(2, list.get(0))
+        XCTAssertEqual(3, list.get(1))
+    }
+    
+    func test_removeAtFirstPosition_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        let reslut = list.removeAt(index: 1)
+        //then
+        XCTAssertEqual(2, reslut)
+        XCTAssertEqual(1, list.get(0))
+        XCTAssertEqual(3, list.get(1))
+    }
+    
+    func test_removeAtLastPosition_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        //when
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        let reslut = list.removeAt(index: 2)
+        //then
+        XCTAssertEqual(3, reslut)
+        XCTAssertEqual(1, list.get(0))
+        XCTAssertEqual(2, list.get(1))
+    }
+    
+    func test_removeAtL_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let reslut = list.removeAt(index: 2)
+        //then
+        XCTAssertNil(reslut)
+    }
+    
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithoutTail<Int>()
     }
-    
-    
-    
 
 }
