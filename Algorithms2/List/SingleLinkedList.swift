@@ -267,6 +267,11 @@ class SingleLinkedList<Item: Comparable> {
         }
     }
     
+    func removeEnd() -> Item? {
+        //Template method, please implement me in the subclass
+        return nil
+    }
+    
     func revert() {
         var a = head
         var b = head?.next

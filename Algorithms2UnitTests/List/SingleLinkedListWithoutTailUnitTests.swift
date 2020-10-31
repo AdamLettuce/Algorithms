@@ -477,7 +477,7 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(2, list.get(1))
     }
     
-    func test_removeAtL_emptyList() {
+    func test_removeAt_emptyList() {
         //given
         let list = newInstance()
         //when
@@ -485,6 +485,37 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         //then
         XCTAssertNil(reslut)
     }
+    
+    func test_removeEnd_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let reslut = list.removeEnd()
+        //then
+        XCTAssertNil(reslut)
+    }
+    
+    func test_removeEnd_listWithOneElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        let reslut = list.removeEnd()
+        //then
+        XCTAssertEqual(10,reslut)
+    }
+    
+    func test_removeEnd_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        let reslut = list.removeEnd()
+        //then
+        XCTAssertEqual(20,reslut)
+    }
+    
     
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithoutTail<Int>()

@@ -6,7 +6,7 @@ class SingleLinkedListWithTail<Item: Comparable>: SingleLinkedList<Item> {
     
     var tail: Node<Item>?
 
-    func removeEnd() -> Item? {
+    override func removeEnd() -> Item? {
         var result: Item?
         if head !== tail {
             let previous = findPrevious(node: tail!)
