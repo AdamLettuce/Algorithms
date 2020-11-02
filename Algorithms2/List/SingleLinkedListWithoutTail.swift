@@ -4,7 +4,7 @@ import Foundation
 
 class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
         
-    func removeEnd() -> Item? {
+    override func removeEnd() -> Item? {
         if isEmpty() {
             return nil
         }
@@ -80,5 +80,20 @@ class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
         
         return tmp?.data
     }
-
+    
+    override func revert() {
+        var a = head
+        var b = head?.next
+        var c = head?.next?.next
+        
+        while b != nil {
+            b?.next = a
+            a?.next = nil
+            a = b
+            b = c
+            c = c?.next
+        }
+        
+        head = a
+    }
 }

@@ -222,34 +222,20 @@ class SingleLinkedList<Item: Comparable> {
     func removeFirstWith(key: Item) -> Item? {
         return nil
     }
-    
-    /* Brute-force solution
-     func removeAllWithOn3(key: Item) {
-         while contains(key: key) {
-             var iterator = head
-             var counter = 0
-             while iterator != nil {
-                 if iterator!.data == key {
-                     removeAt(index: counter)
-                     counter -= 1
-                 }
-                 counter += 1
-                 iterator = iterator!.next
-             }
-         }
-     }
-     */
-    
-    func removeAllWith(key: Item) {
+        
+    func removeAllWith(key: Item) -> Int {
         if isEmpty() {
-            return
+            return 0
         }
 
+        var result = 0
+        
         while head?.data == key {
             let headNext = head!.next
             head!.next = nil
             elementsCount -= 1
             head = headNext
+            result += 1
         }
         
         var a = head
@@ -260,11 +246,14 @@ class SingleLinkedList<Item: Comparable> {
                 b!.next = nil
                 elementsCount -= 1
                 b = a!.next
+                result += 1
             } else {
                 a = a!.next
                 b = a!.next
             }
         }
+        
+        return result
     }
     
     func removeEnd() -> Item? {
@@ -361,4 +350,18 @@ class SingleLinkedList<Item: Comparable> {
         return result
     }
     
+    func toStringReverted() -> String {
+        return "[".appending(toStringReverted(node: head)).appending("]")
+    }
+    
+    private func toStringReverted(node: Node<Item>?) -> String {
+        if node == nil {
+            return ""
+        }
+        if node!.next == nil {
+            return "\(node!.data)"
+        }
+        return "\(toStringReverted(node: node!.next)), \(node!.data)"
+        
+    }
 }

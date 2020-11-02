@@ -516,6 +516,166 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(20,reslut)
     }
     
+    func test_removeAllWithKey_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let result = list.removeAllWith(key: 10)
+        //then
+        XCTAssertEqual(0, result)
+    }
+    
+    func test_removeAllWithKey_listWithOneNonMatchingElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 10)
+        //then
+        XCTAssertEqual(0, result)
+    }
+    
+    func test_removeAllWithKey_listWithOneMatchingElementAtTheBeginning() {
+        //given
+        let list = newInstance()
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(1, result)
+    }
+    
+    func test_removeAllWithKey_listWithTwoMatchingElementsAtTheBeginning() {
+        //given
+        let list = newInstance()
+        list.insertEnd(5)
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(2, result)
+    }
+    
+    func test_removeAllWithKey_listWithOneMatchingElementAtTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertEnd(4)
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(1, result)
+    }
+    
+    func test_removeAllWithKey_listWithTwoMatchingElementsAtTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertEnd(4)
+        list.insertEnd(5)
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(2, result)
+    }
+    
+    func test_removeAllWithKey_listWithOneMatchingElementAtTheBeginningAndAtTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertEnd(5)
+        list.insertEnd(4)
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(2, result)
+    }
+    
+    func test_removeAllWithKey_listWithOneMatchingElementAtTheMiddle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(4)
+        list.insertEnd(5)
+        list.insertEnd(4)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(1, result)
+    }
+    
+    func test_removeAllWithKey_listWithOneMatchingElementAtTheBeginningAtTheMiddleAndAtTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertEnd(5)
+        list.insertEnd(4)
+        list.insertEnd(5)
+        list.insertEnd(4)
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(3, result)
+    }
+    
+    func test_removeAllWithKey_listWithMatchingElementsAtTheBeginningAtTheMiddleAndAtTheEnd() {
+        //given
+        let list = newInstance()
+        list.insertEnd(5)
+        list.insertEnd(5)
+        list.insertEnd(4)
+        list.insertEnd(5)
+        list.insertEnd(5)
+        list.insertEnd(5)
+        list.insertEnd(4)
+        list.insertEnd(5)
+        list.insertEnd(5)
+        //when
+        let result = list.removeAllWith(key: 5)
+        //then
+        XCTAssertEqual(7, result)
+    }
+    
+    func test_toStringReverted_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let result = list.toStringReverted()
+        //then
+        XCTAssertEqual("[]", result)
+    }
+    
+    func test_toStringReverted_oneElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        //when
+        let result = list.toStringReverted()
+        //then
+        XCTAssertEqual("[1]", result)
+    }
+    
+    func test_toStringReverted_twoElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)        
+        //when
+        let result = list.toStringReverted()
+        //then
+        XCTAssertEqual("[2, 1]", result)
+    }
+    
+    func test_toStringReverted_threeElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        //when
+        let result = list.toStringReverted()
+        //then
+        XCTAssertEqual("[3, 2, 1]", result)
+    }
     
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithoutTail<Int>()
