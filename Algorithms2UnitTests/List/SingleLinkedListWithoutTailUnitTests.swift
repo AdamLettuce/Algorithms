@@ -677,6 +677,98 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual("[3, 2, 1]", result)
     }
     
+    func test_hasCycle_emptyList_noCycle() {
+        //given
+        let list = newInstance()
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertFalse(result)
+    }
+    
+    func test_hasCycle_oneElement_noCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertFalse(result)
+    }
+    
+    func test_hasCycle_twoElements_noCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertFalse(result)
+    }
+    
+    func test_hasCycle_threeElements_noCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertFalse(result)
+    }
+    
+    func test_hasCycle_oneElement_hasCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.createCycleBetween(first: list.nodeAt(0)!, second: list.nodeAt(0)!)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    func test_hasCycle_twoElements_hasCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.createCycleBetween(first: list.nodeAt(0)!, second: list.nodeAt(1)!)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    func test_hasCycle_threeElements_hasCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        list.createCycleBetween(first: list.nodeAt(0)!, second: list.nodeAt(2)!)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    func test_hasCycle_fourElements_hasCycle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        list.insertEnd(4)
+        list.createCycleBetween(first: list.nodeAt(2)!, second: list.nodeAt(3)!)
+        //when
+        let result = list.hasCycle()
+        //then
+        XCTAssertTrue(result)
+    }
+    
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithoutTail<Int>()
     }

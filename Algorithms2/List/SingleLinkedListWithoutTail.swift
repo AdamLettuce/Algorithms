@@ -96,4 +96,17 @@ class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
         
         head = a
     }
+
+    //Another solution - my own
+    override func hasCycle() -> Bool {
+        var a = head
+        var b = head?.next?.next
+
+        while a !== b && b != nil {
+            a = a!.next
+            b = b!.next?.next
+        }
+
+        return a != nil && a === b
+    }
 }
