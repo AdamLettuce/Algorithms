@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Node<Item> {
+class Node<Item: Comparable & Hashable> {
     var data: Item
     var next: Node<Item>?
     
@@ -17,7 +17,7 @@ class Node<Item> {
     }
 }
 
-class SingleLinkedList<Item: Comparable> {
+class SingleLinkedList<Item: Comparable & Hashable> {
     
     var head: Node<Item>? = nil
     var elementsCount: Int = 0
@@ -200,13 +200,14 @@ class SingleLinkedList<Item: Comparable> {
     }
     
     func removeBegin() -> Item? {
+        if isEmpty() {
+            return nil
+        }
         let oldHead = head
         let result = head?.data
         head = head?.next
         oldHead?.next = nil
-        if elementsCount > 0 {
-            elementsCount -= 1
-        }
+        elementsCount -= 1
         return result
     }
     
@@ -274,6 +275,30 @@ class SingleLinkedList<Item: Comparable> {
         }
         onRevertEnd()
         head = a
+    }
+    
+    func removeDuplicatesWithAdditionalCollection() {
+        if isEmpty() {
+            return
+        }
+        
+        var prev = head
+        var iterator = head!.next
+        var uniqueElements = Set<Item>()
+        uniqueElements.insert(head!.data)
+        
+        while iterator != nil {
+            if uniqueElements.contains(iterator!.data) {
+                prev!.next = iterator!.next
+                iterator!.next = nil
+                iterator = prev!.next
+                elementsCount -= 1
+            } else {
+                uniqueElements.insert(iterator!.data)
+                prev = iterator!
+                iterator = iterator!.next
+            }
+        }
     }
     
     func onRevertEnd() {

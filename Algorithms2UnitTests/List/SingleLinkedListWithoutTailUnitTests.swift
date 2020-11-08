@@ -115,6 +115,15 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertNil(actual)
     }
     
+    func test_removeBegin_emptyList_sizeZero() {
+        //given
+        let list = newInstance()
+        //when
+        let _ = list.removeBegin()
+        //then
+        XCTAssertEqual(0, list.size())
+    }
+    
     func test_removeBegin_oneElement() {
         //given
         let list = newInstance()
@@ -767,6 +776,62 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         let result = list.hasCycle()
         //then
         XCTAssertTrue(result)
+    }
+    
+    func test_removeDuplicates_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.removeDuplicatesWithAdditionalCollection()
+        //then
+        XCTAssertEqual(0,list.size())
+    }
+    
+    func test_removeDuplicatesWithAdditionalCollection_listWithOneElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        list.removeDuplicatesWithAdditionalCollection()
+        //then
+        XCTAssertEqual(1,list.size())
+    }
+    
+    func test_removeDuplicatesWithAdditionalCollection_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(10)
+        //when
+        list.removeDuplicatesWithAdditionalCollection()
+        //then
+        XCTAssertEqual(1,list.size())
+    }
+    
+    func test_removeDuplicatesWithAdditionalCollection_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(10)
+        list.insertEnd(10)
+        //when
+        list.removeDuplicatesWithAdditionalCollection()
+        //then
+        XCTAssertEqual(1,list.size())
+    }
+    
+    func test_removeDuplicatesWithAdditionalCollection_listWithFiveTwoDifferentElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        list.insertEnd(10)
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        list.removeDuplicatesWithAdditionalCollection()
+        //then
+        XCTAssertEqual(2,list.size())
     }
     
     func newInstance() -> SingleLinkedList<Int> {

@@ -2,7 +2,7 @@
 import Foundation
 
 
-class SingleLinkedListWithoutTail<Item: Comparable>: SingleLinkedList<Item> {
+class SingleLinkedListWithoutTail<Item: Comparable & Hashable>: SingleLinkedList<Item> {
         
     override func removeEnd() -> Item? {
         if isEmpty() {
