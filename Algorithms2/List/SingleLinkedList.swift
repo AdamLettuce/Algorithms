@@ -301,6 +301,30 @@ class SingleLinkedList<Item: Comparable & Hashable> {
         }
     }
     
+    func removeDuplicatesWithoutAdditionalCollection() {
+        if isEmpty() {
+            return
+        }
+        
+        var iterator1 = head
+        while iterator1?.next != nil {
+            var previousIterator2 = iterator1
+            var iterator2 = iterator1!.next
+            while iterator2 != nil {
+                if iterator1!.data == iterator2!.data {
+                    previousIterator2!.next = iterator2!.next
+                    iterator2!.next = nil
+                    iterator2 = previousIterator2!.next
+                    elementsCount -= 1
+                } else {
+                    previousIterator2 = iterator2
+                    iterator2 = iterator2!.next
+                }
+            }
+            iterator1 = iterator1!.next
+        }
+    }
+    
     func onRevertEnd() {
         //Template method, please implement me in the subclass
     }

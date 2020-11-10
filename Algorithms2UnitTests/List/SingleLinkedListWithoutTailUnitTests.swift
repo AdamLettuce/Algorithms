@@ -778,7 +778,7 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_removeDuplicates_emptyList() {
+    func test_removeDuplicatesWithAdditionalCollection_emptyList() {
         //given
         let list = newInstance()
         //when
@@ -830,6 +830,62 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         list.insertEnd(20)
         //when
         list.removeDuplicatesWithAdditionalCollection()
+        //then
+        XCTAssertEqual(2,list.size())
+    }
+    
+    func test_removeDuplicatesWithoutAdditionalCollection_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.removeDuplicatesWithoutAdditionalCollection()
+        //then
+        XCTAssertEqual(0,list.size())
+    }
+    
+    func test_removeDuplicatesWithoutAdditionalCollection_listWithOneElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        list.removeDuplicatesWithoutAdditionalCollection()
+        //then
+        XCTAssertEqual(1,list.size())
+    }
+    
+    func test_removeDuplicatesWithoutAdditionalCollection_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(10)
+        //when
+        list.removeDuplicatesWithoutAdditionalCollection()
+        //then
+        XCTAssertEqual(1,list.size())
+    }
+    
+    func test_removeDuplicatesWithoutAdditionalCollection_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(10)
+        list.insertEnd(10)
+        //when
+        list.removeDuplicatesWithoutAdditionalCollection()
+        //then
+        XCTAssertEqual(1,list.size())
+    }
+    
+    func test_removeDuplicatesWithoutAdditionalCollection_listWithFiveTwoDifferentElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        list.insertEnd(10)
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        list.removeDuplicatesWithoutAdditionalCollection()
         //then
         XCTAssertEqual(2,list.size())
     }
