@@ -365,6 +365,20 @@ class SingleLinkedList<Item: Comparable & Hashable> {
   
     }
     
+    func fromElement(_ k: Int) -> Node<Item>? {
+        if isEmpty() { return nil }
+        
+        var i = 0
+        var iterator = head
+        
+        while iterator != nil && i < k {
+            iterator = iterator!.next
+            i += 1
+        }
+        
+        return iterator
+    }
+    
     func toArray() -> [Item] {
         var iterator = head
         var result: [Item] = []
@@ -378,6 +392,10 @@ class SingleLinkedList<Item: Comparable & Hashable> {
     }
     
     func toString() -> String {
+        return toString(from: head)
+    }
+    
+    func toString(from: Node<Item>?) -> String {
         if isEmpty() {
             return "[]"
         }
@@ -387,15 +405,17 @@ class SingleLinkedList<Item: Comparable & Hashable> {
         }
         
         var result = "["
-        var iterator = head
+        var iterator = from
         while(iterator != nil) {
             if iterator?.next != nil {
                 result += "\(iterator!.data), "
-            } else {
-                result += "\(iterator!.data)]"
+            }
+            else {
+                result += "\(iterator!.data)"
             }
             iterator = iterator!.next
         }
+        result += "]"
         return result
     }
     

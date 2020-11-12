@@ -864,6 +864,17 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(1,list.size())
     }
     
+    func test_removeDuplicatesWithoutAdditionalCollection_listWithTwoDifferentElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        list.removeDuplicatesWithoutAdditionalCollection()
+        //then
+        XCTAssertEqual(2,list.size())
+    }
+    
     func test_removeDuplicatesWithoutAdditionalCollection_listWithThreeElements() {
         //given
         let list = newInstance()
@@ -888,6 +899,57 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         list.removeDuplicatesWithoutAdditionalCollection()
         //then
         XCTAssertEqual(2,list.size())
+    }
+    
+    func test_fromElement_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let actual = list.fromElement(10)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_fromElement_listWithOneElement_indexOutOfRange() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        let actual = list.fromElement(1)
+        //then
+        XCTAssertEqual("[]",list.toString(from: actual))
+    }
+    
+    func test_fromElement_listWithOneElement_indexInRange() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        let actual = list.fromElement(0)
+        //then
+        XCTAssertEqual("[10]",list.toString(from: actual))
+    }
+    
+    func test_fromElement_listWithTwoElements_indexInRange_1stElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        let actual = list.fromElement(0)
+        //then
+        XCTAssertEqual("[10, 20]",list.toString(from: actual))
+    }
+    
+    func test_fromElement_listWithTwoElements_indexInRange_2ndElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        let actual = list.fromElement(1)
+        //then
+        XCTAssertEqual("[20]",list.toString(from: actual))
     }
     
     func newInstance() -> SingleLinkedList<Int> {
