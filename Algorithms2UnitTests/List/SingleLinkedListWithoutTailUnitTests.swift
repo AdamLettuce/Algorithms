@@ -952,6 +952,129 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual("[20]",list.toString(from: actual))
     }
     
+    func test_delete_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.delete(node: Node(10))
+        //then
+        XCTAssertTrue(list.isEmpty())
+    }
+    
+    func test_delete_oneElement_deleteFromHead() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        let nodeToDelete = list.getNode(0)
+        //when
+        list.delete(node: nodeToDelete!)
+        //then
+        XCTAssertTrue(list.isEmpty())
+    }
+    
+    func test_delete_twoElements_deleteFromHead() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        let nodeToDelete = list.getNode(0)
+        //when
+        list.delete(node: nodeToDelete!)
+        //then
+        XCTAssertEqual(1, list.size())
+        XCTAssertEqual(20, list.get(0))
+    }
+    
+    func test_delete_threeElements_deleteFromMiddle() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        list.insertEnd(30)
+        let nodeToDelete = list.getNode(1)
+        //when
+        list.delete(node: nodeToDelete!)
+        //then
+        XCTAssertEqual(2, list.size())
+        XCTAssertEqual(10, list.get(0))
+        XCTAssertEqual(30, list.get(1))
+    }
+    
+    func test_splitList_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        list.splitList(0)
+        //then
+        XCTAssert(list.isEmpty())
+    }
+    
+    func test_splitList_listWithOneElement() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        //when
+        list.splitList(10)
+        //then
+        XCTAssertEqual(10, list.get(0))
+    }
+    
+    func test_splitList_listWithTwoElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(20)
+        list.insertEnd(10)
+        //when
+        list.splitList(20)
+        //then
+        XCTAssertEqual(10, list.get(0))
+        XCTAssertEqual(20, list.get(1))
+    }
+    
+    func test_splitList_listWithTwoElementsSortedSplitLower() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        list.splitList(10)
+        //then
+        XCTAssertEqual(10, list.get(0))
+        XCTAssertEqual(20, list.get(1))
+    }
+    
+    func test_splitList_listWithThreeElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(20)
+        list.insertEnd(15)
+        list.insertEnd(10)
+        //when
+        list.splitList(15)
+        //then
+        XCTAssertEqual(10, list.get(0))
+        XCTAssertEqual(20, list.get(1))
+        XCTAssertEqual(15, list.get(2))
+    }
+    
+    func test_splitList_listWithFiveElements() {
+        //given
+        let list = newInstance()
+        list.insertEnd(20)
+        list.insertEnd(35)
+        list.insertEnd(40)
+        list.insertEnd(5)
+        list.insertEnd(15)
+        //when
+        list.splitList(35)
+        //then
+        XCTAssertEqual(15, list.get(0))
+        XCTAssertEqual(5, list.get(1))
+        XCTAssertEqual(20, list.get(2))
+        XCTAssertEqual(35, list.get(3))
+        XCTAssertEqual(40, list.get(4))
+    }
+    
     func newInstance() -> SingleLinkedList<Int> {
         return SingleLinkedListWithoutTail<Int>()
     }

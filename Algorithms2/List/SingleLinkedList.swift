@@ -352,6 +352,10 @@ class SingleLinkedList<Item: Comparable & Hashable> {
     }
     
     func get(_ index: Int) -> Item? {
+        return getNode(index)?.data
+    }
+    
+    func getNode(_ index: Int) -> Node<Item>? {
         if index >= elementsCount || index < 0 {
             return nil
         }
@@ -361,8 +365,7 @@ class SingleLinkedList<Item: Comparable & Hashable> {
             iterator = iterator?.next
             counter += 1
         }
-        return iterator?.data
-  
+        return iterator
     }
     
     func fromElement(_ k: Int) -> Node<Item>? {
@@ -377,6 +380,40 @@ class SingleLinkedList<Item: Comparable & Hashable> {
         }
         
         return iterator
+    }
+    
+    func delete(node: Node<Item>) {
+        if node === head {
+            head = head?.next
+            node.next = nil
+            elementsCount -= 1
+        } else
+        if node !== head {
+            var iterator = head
+            while iterator != nil && iterator!.next !== node {
+                iterator = iterator!.next
+            }
+            iterator?.next = node.next
+            node.next = nil
+            elementsCount -= 1
+        }
+    }
+    
+    func splitList(_ x: Item) {
+        if isEmpty() { return }
+        var a = head!.next
+        var b = head
+        while a != nil {
+            if a!.data < x && a !== head {
+                b!.next = a!.next
+                a!.next = head
+                head = a
+                a = b!.next
+            } else {
+                b = a
+                a = a!.next
+            }
+        }
     }
     
     func toArray() -> [Item] {
