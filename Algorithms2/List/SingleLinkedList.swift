@@ -383,20 +383,19 @@ class SingleLinkedList<Item: Comparable & Hashable> {
     }
     
     func delete(node: Node<Item>) {
-        if node === head {
-            head = head?.next
-            node.next = nil
+        if node === head && node.next == nil {
+            head = nil
             elementsCount -= 1
-        } else
-        if node !== head {
-            var iterator = head
-            while iterator != nil && iterator!.next !== node {
-                iterator = iterator!.next
-            }
-            iterator?.next = node.next
-            node.next = nil
-            elementsCount -= 1
+            return
         }
+        if node.next == nil {
+            return
+        }
+        node.data = node.next!.data
+        let next = node.next!
+        node.next = next.next
+        next.next = nil
+        elementsCount -= 1
     }
     
     func splitList(_ x: Item) {
