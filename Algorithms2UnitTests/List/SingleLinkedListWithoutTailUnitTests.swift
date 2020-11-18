@@ -1035,12 +1035,12 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         //given
         let list = newInstance()
         list.insertEnd(10)
-        list.insertEnd(20)
+        list.insertEnd(10)
         //when
-        list.splitList(10)
+        list.splitList(20)
         //then
         XCTAssertEqual(10, list.get(0))
-        XCTAssertEqual(20, list.get(1))
+        XCTAssertEqual(10, list.get(1))
     }
     
     func test_splitList_listWithThreeElements() {
@@ -1073,6 +1073,68 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         XCTAssertEqual(20, list.get(2))
         XCTAssertEqual(35, list.get(3))
         XCTAssertEqual(40, list.get(4))
+    }
+    
+    func test_kThFromEnd_emptyList() {
+        //given
+        let list = newInstance()
+        //when
+        let actual = list.kThFromEnd(1)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_kThFromEnd_oneElement_returnLast() {
+        //given
+        let list = newInstance()
+        list.insertEnd(20)
+        //when
+        let actual = list.kThFromEnd(0)
+        //then
+        XCTAssertEqual(20,actual!.data)
+    }
+    
+    func test_kThFromEnd_oneElement_returnNegative() {
+        //given
+        let list = newInstance()
+        list.insertEnd(20)
+        //when
+        let actual = list.kThFromEnd(-1)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    func test_kThFromEnd_oneElement_returnBefore() {
+        //given
+        let list = newInstance()
+        list.insertEnd(20)
+        //when
+        let actual = list.kThFromEnd(1)
+        //then
+        XCTAssertNil(actual)
+    }
+    
+    
+    func test_kThFromEnd_twoElements_returnFirst() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        let actual = list.kThFromEnd(1)
+        //then
+        XCTAssertEqual(10,actual!.data)
+    }
+
+    func test_kThFromEnd_twoElements_returnLast() {
+        //given
+        let list = newInstance()
+        list.insertEnd(10)
+        list.insertEnd(20)
+        //when
+        let actual = list.kThFromEnd(0)
+        //then
+        XCTAssertEqual(20,actual!.data)
     }
     
     func newInstance() -> SingleLinkedList<Int> {

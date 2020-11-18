@@ -415,6 +415,30 @@ class SingleLinkedList<Item: Comparable & Hashable> {
         }
     }
     
+    func kThFromEnd(_ k: Int) -> Node<Item>? {
+        if isEmpty() || k < 0 { return nil }
+        
+        var a = head
+        var b = head
+        var i = 0
+        
+        while i < k && b != nil {
+            i += 1
+            b = b!.next
+        }
+          
+        if b == nil {
+            return nil
+        }
+        
+        while b?.next != nil {
+            a = a!.next
+            b = b!.next
+        }
+        
+        return a
+    }
+    
     func toArray() -> [Item] {
         var iterator = head
         var result: [Item] = []
