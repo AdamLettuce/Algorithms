@@ -40,19 +40,7 @@ class SingleLinkedListWithTail<Item: Comparable & Hashable>: SingleLinkedList<It
         }
         return result
     }
-    
-    override func onInsertBeginIsEmpty() {
-        tail = head
-    }
-    
-    override func onInsertEndIsEmpty(_ node: Node<Item>) {
-        tail = node
-    }
-
-    override func onInsertEndIsNotEmpty(_ node: Node<Item>) {
-        tail = node
-    }
-                
+                    
     override func onRevertEnd() {
         tail = head
 //        last?.next = nil ??? please visualize why this is necessary ???
