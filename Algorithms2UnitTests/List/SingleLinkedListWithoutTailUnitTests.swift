@@ -969,7 +969,7 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         //when
         list.delete(node: nodeToDelete!)
         //then
-        XCTAssertTrue(list.isEmpty())
+        XCTAssertFalse(list.isEmpty())
     }
     
     func test_delete_twoElements_deleteFromHead() {
@@ -1135,6 +1135,14 @@ class SingleLinkedListWithoutTailUnitTests: XCTestCase {
         let actual = list.kThFromEnd(0)
         //then
         XCTAssertEqual(20,actual!.data)
+    }
+    
+    func testPrintReverted() {
+        let list = newInstance()
+        list.insertEnd(1)
+        list.insertEnd(2)
+        list.insertEnd(3)
+        print(list.toStringREVERT(a: list.head))
     }
     
     func newInstance() -> SingleLinkedList<Int> {

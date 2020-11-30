@@ -362,19 +362,13 @@ class SingleLinkedList<Item: Comparable & Hashable> {
     }
     
     func delete(node: Node<Item>) {
-        if node === head && node.next == nil {
-            head = nil
+        if node.next != nil {
+            node.data = node.next!.data
+            let tmp = node.next!
+            node.next = tmp.next
+            tmp.next = nil
             elementsCount -= 1
-            return
         }
-        if node.next == nil {
-            return
-        }
-        node.data = node.next!.data
-        let next = node.next!
-        node.next = next.next
-        next.next = nil
-        elementsCount -= 1
     }
     
     func splitList(_ x: Item) {
@@ -428,6 +422,13 @@ class SingleLinkedList<Item: Comparable & Hashable> {
             index += 1
         }
         return result
+    }
+    
+    func toStringREVERT(a: Node<Item>?) {
+        if a != nil {
+            toStringREVERT(a: a!.next)
+            print(a!.data)
+        }
     }
     
     func toString() -> String {
